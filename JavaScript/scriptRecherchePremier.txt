@@ -1,0 +1,34 @@
+Partie HTML
+ <button onclick="tt()">Click me</button> 
+<div id="ret">
+
+</div>
+
+Partie JS
+function tt(){
+console.log("go")
+var rr = document.getElementById("ret")
+
+var borne = 10000;
+var premier = [2] //implement with value
+var t = true
+
+for(var i = 3; i<=borne; i++){
+	if(!premier.includes(i)){
+	t = true;
+  premier.some(function(el) {
+    console.log(el);
+    if(i % el === 0){
+    t = false;
+    return 0;
+    }
+  });
+  if(t){
+  premier.push(i)
+  }
+  }
+}
+
+
+rr.innerHTML = premier
+}

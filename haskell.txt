@@ -1,0 +1,71 @@
+Partie1: https://openclassrooms.com/fr/courses/1385376-apprenez-la-programmation-fonctionnelle-avec-haskell
+Partie2: https://learnxinyminutes.com/docs/fr-fr/haskell-fr/
+
+note:
+	on ne peut renvoyer qu'un seul type dans une methode (entre un if et un else les deux doient être int/string etc..)
+	!!! une fonction ne doit pas commencer par une majuscule cf exo4
+	si tu doit faire une methode qui ressort true ou false -> pas de if mais directement le test cf. exo4
+
+
+Partie 1:
+exo haskell:
+
+Des fonctions myMin et myMax qui prennent chacune deux arguments et renvoient respectivement le minimum et le maximum des deux arguments
+
+À partir de ces fonctions, codez une fonction qui donne le minimum ou le maximum de 4 nombres
+
+En utilisant myMin et myMax, codez une fonction bornerDans qui prend trois arguments et renvoie le troisième argument s'il est dans l'intervalle formé par les deux premiers, ou renvoie la borne de l'intervalle la plus proche.
+Exemples:
+bornerDans 5 7 6 = 6 -- dans l'intervalle
+bornerDans 5 7 4 = 5 -- trop petit
+bornerDans 5 7 9 = 7 -- trop grand
+
+Codez une fonction qui prend trois arguments et dit si le troisième argument est dans l'intervalle fermé formé par les deux premiers arguments (on considèrera que le premier argument est inférieur ou égal au deuxième)
+
+En n'utilisant qu'une seule comparaison, codez une fonction qui prend une paire de nombre et renvoie cette paire triée
+
+Codez une fonction qui prend deux vecteurs représentés par des paires de nombres, et donne la somme de ces deux vecteurs
+
+Codez une fonction qui prend un vecteur et renvoie sa norme
+
+Codez une fonction qui prend un nombre et un vecteur, et renvoie le produit du vecteur par ce nombre
+
+Codez une fonction qui prend deux vecteurs et renvoie le produit scalaire de ces deux vecteurs
+
+
+1) max a b = if (a-b)>0 then a else b
+min a b = if (a-b)<0 then a else b
+
+2) min4 a b c d = min t y  
+..   where t = min a b 
+..         y = min c d
+
+3)borner a b c = if min a c == c then a else if max b c == c then b else c
+
+
+
+4)tIsInborne a b c = (min a c == a)&&(max b c == b)
+
+
+5)trie (a,b) = if a <= b then (a,b) else (b,a)
+
+6)sommeVecteur (a,b) (c,d) = (a+c,b+d)
+
+7)normeVecteur (a,b) = sqrt ((a*a)+(b^2))
+
+8)produitVecteur x (a,b) = (a*x,b*x)
+
+
+import fichier = :l nom_fic.hs
+conaitre le type d'un element = :t variable
+
+
+
+Partie 2:
+
+input: 
+main :: IO ()
+main = do 
+   putStrLn "Quel est ton nom ?"
+   name <- getLine -- prend une ligne et assigne sa valeur à `name`
+   putStrLn $ "Salut, " ++ name

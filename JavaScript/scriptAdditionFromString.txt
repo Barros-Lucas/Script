@@ -1,0 +1,26 @@
+fait le 05/03/2019 pour Madom par Barros Lucas
+
+
+script permetant de calculer la somme de nombres floatant a partir d'une String du type: "391.68/379.44/"
+
+
+
+
+PARTIE HTML
+
+PARTIE JS
+
+function somme(){
+var t = [...]
+
+var words = t.split('/');
+var somme = 0.0;
+for(var i = 0; i<words.length-1;i++){
+console.log(words[i])
+var value = parseFloat(words[i]);
+somme+=value
+}
+
+alert(somme)
+alert(somme/(words.length-1))
+}

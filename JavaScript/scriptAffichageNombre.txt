@@ -1,0 +1,20 @@
+Partie HTML
+<button onclick="tt()">Click me</button> 
+<div id="ret">
+
+</div>
+
+Partie JS
+function tt(){
+console.log("go")
+var rr = document.getElementById("ret")
+
+var t = "["
+for(var i = 2; i>=1; i--){
+t+=i.toString()+","
+}
+t=t.slice(0,-1)
+t+="]"
+
+rr.innerHTML = t
+}

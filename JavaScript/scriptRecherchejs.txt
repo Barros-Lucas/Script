@@ -1,0 +1,134 @@
+fait le 03/01/2019 pour Madom par Barros Lucas
+
+
+script permetant la recherche d'adresse mail dans un grand String en recherchant les doublons et les champs contenant plusireurs adresses.
+
+
+
+
+PARTIE HTML
+<div id="c" style="display:none">
+##cf. fichier p_madom_client_03_01.sql contenant le contenue d'une table de base de données
+</div>
+
+
+ <button onclick="tt()">Click me</button> 
+
+
+<br>
+<br>
+<table id="to">
+</table>
+<br>
+<br>
+<br>
+<br>
+<table id="toto">
+</table>
+<button id="btnExport" onclick="fnExcelReport();"> EXPORT </button>
+
+
+PARTIE JS
+
+//remplace let reg = ... par ce que tu cherches (@,€,...)
+
+function tt(){
+
+var c = document.getElementById('c');
+
+var table = document.getElementById('to');
+var table2 = document.getElementById('toto');
+
+var string = c.innerHTML;
+var chars = string.split('),(');
+
+var mail =[];
+var vide = [];
+var longmail = [];
+var longmailIpour = [];
+let reg = /[-.\w]+@([\w-]+\.)+[\w-]{2,20}/g;
+let reg2 = /,/g;
+
+for(var i = 0;i<chars.length;i++){
+var temp = chars[i].match(reg);
+if(temp == null){
+vide.push(chars[i]);
+}else{
+var temp2 = String(temp).match(reg2)
+if(temp2 == null){
+mail.push(temp);
+}else{
+longmail.push(temp);
+}
+
+}
+}
+
+
+var to ="<tr><td> </td></tr>";
+
+for(var k =0; k<mail.length;k++){
+to += "<tr><td>"+mail[k]+"</td></tr>"
+}
+
+var to2 ="<tr><td> </td></tr>";
+
+for(var k =0; k<longmail.length;k++){
+to2 += "<tr><td>"+longmail[k]+"</td></tr>"
+}
+
+var doublons = [];
+var temp = [];
+for(var k =0; k<mail.length;k++){
+if(temp.includes(String(mail[k]))){
+doublons.push(String(mail[k]))
+}else{
+temp.push(String(mail[k]))
+}
+}
+
+var to3 ="<tr><td> </td></tr>";
+
+for(var k =0; k<doublons.length;k++){
+to3 += "<tr><td>"+doublons[k]+"</td></tr>"
+}
+
+
+
+table.innerHTML = to2;
+}
+
+
+function fnExcelReport()
+{
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+    tab = document.getElementById('to'); // id of table
+
+    for(j = 0 ; j < tab.rows.length ; j++) 
+    {     
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        //tab_text=tab_text+"</tr>";
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE "); 
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus(); 
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }  
+    else                 //other browser not tested on IE 11
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+    return (sa);
+}
