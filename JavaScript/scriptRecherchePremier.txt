@@ -5,30 +5,31 @@ Partie HTML
 </div>
 
 Partie JS
+
+//Ne surtout pas utiliser de includes juste apres le for k car fait tout ralentir (log(2n) en unité de temps)
+
 function tt(){
 console.log("go")
 var rr = document.getElementById("ret")
 
-var borne = 10000;
+var borne = 1000000;
 var premier = [2] //implement with value
 var t = true
+var el;
+for(var k = 3; k<borne; k++){
 
-for(var i = 3; i<=borne; i++){
-	if(!premier.includes(i)){
-	t = true;
-  premier.some(function(el) {
-    console.log(el);
-    if(i % el === 0){
-    t = false;
-    return 0;
+t = true
+	for(var i=0; i< premier.length; i++){
+  	el = premier[i]
+    if(k % el === 0){
+    t = false
+    break;
     }
-  });
+  }
   if(t){
-  premier.push(i)
+  premier.push(k)
   }
+  
   }
-}
-
-
-rr.innerHTML = premier
+  rr.innerHTML = premier
 }
